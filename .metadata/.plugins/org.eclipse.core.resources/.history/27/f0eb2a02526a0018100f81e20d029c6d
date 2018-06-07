@@ -1,0 +1,36 @@
+package Tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import Main.Calculadora;
+
+public class TesteSomar {
+	
+	static Calculadora calculadora;
+	
+	@BeforeAll
+	public static void configurar(){
+		calculadora = new Calculadora();
+	}
+	
+	@Test
+	public void somarDoisMaisDois() throws Exception {
+		assertEquals(4, calculadora.somar(2,2));
+	}
+	
+	@Test
+	public void somarTresMaisTres() throws Exception {
+		assertEquals(6, calculadora.somar(3, 3));
+	}
+	
+	@Test
+	public void somarComResultadoAnterior() {
+		calculadora.somar(2, 2);
+		assertEquals(6,calculadora.somar(2, calculadora.obterMemoria()));
+	}
+	
+	
+}

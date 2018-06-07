@@ -1,0 +1,26 @@
+package Tests;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import Main.Empresa;
+
+public class TesteEmpresa {
+
+	Empresa empresa;
+	
+	@BeforeEach
+	public void beforeEach() {
+		empresa = new Empresa();
+	}
+	
+	
+	@Test
+	void testFuncionarios() throws Exception {
+		
+		Funcionario Godofredo = new Funcionario("Godofredo","0000001");
+		empresa.addFuncionario(Godofredo);
+		assertNotNuLL(empresa.funcionarios());
+		assertEquals(empresa.getFuncionarioByID("0000001"), )
+	}
+}

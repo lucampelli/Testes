@@ -1,0 +1,9 @@
+package Main;
+
+public class Calculadora {
+
+	public int somar(int i, int j) {
+		return i + j;
+	}
+
+}

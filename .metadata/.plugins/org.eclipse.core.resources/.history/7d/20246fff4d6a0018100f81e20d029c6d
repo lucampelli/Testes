@@ -1,0 +1,15 @@
+package Tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+public class TesteSubtrair {
+
+	@Test
+	void testDoisMenosDois() throws Exception {
+		Calculadora calculadora = new Calculadora();
+		assertEquals(0,calculadora.subtrair(2,2));
+	}
+	
+}

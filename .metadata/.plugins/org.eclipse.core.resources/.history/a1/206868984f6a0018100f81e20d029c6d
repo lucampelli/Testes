@@ -1,0 +1,29 @@
+package Tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+
+import Main.Calculadora;
+
+public class TesteSubtrair {
+
+	Calculadora calculadora;
+	
+	@BeforeAll
+	public void configurar(){
+		calculadora = new Calculadora();
+	}
+	
+	@Test
+	public void testDoisMenosDois() throws Exception {
+		assertEquals(0,calculadora.subtrair(2,2));
+	}
+	
+	@Test
+	public void testUmMenosDois() throws Exception {
+		assertEquals(-1,calculadora.subtrair(1,2));
+	}
+	
+}

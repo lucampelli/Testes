@@ -1,0 +1,23 @@
+package Tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+import Main.Calculadora;
+
+public class TesteSomar {
+	
+	@Test
+	void somarDoisMaisDois() throws Exception {
+		
+		Calculadora calculadora = new Calculadora();
+		assertEquals(4, calculadora.somar(2,2));
+	}
+	
+	@Test
+	void somarTresMaisTres() throws Exception {
+		Calculadora calculadora = new Calculadora();
+		assertEquals(6, calculadora.somar(3, 3));
+	}
+}

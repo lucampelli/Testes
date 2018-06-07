@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="Rerun TesteSubtrair" project="Testes" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="Tests.TesteSubtrair" time="0.008" displayname="TesteSubtrair" uniqueid="[engine:junit-jupiter]/[class:Tests.TesteSubtrair]">
+    <testcase name="testDoisMenosDois" classname="Tests.TesteSubtrair" time="0.004" displayname="testDoisMenosDois()" uniqueid="[engine:junit-jupiter]/[class:Tests.TesteSubtrair]/[method:testDoisMenosDois()]"/>
+    <testcase name="testUmMenosDois" classname="Tests.TesteSubtrair" time="0.001" displayname="testUmMenosDois()" uniqueid="[engine:junit-jupiter]/[class:Tests.TesteSubtrair]/[method:testUmMenosDois()]"/>
+    <testcase name="subtrairComResultadoAnterior" classname="Tests.TesteSubtrair" time="0.003" displayname="subtrairComResultadoAnterior()" uniqueid="[engine:junit-jupiter]/[class:Tests.TesteSubtrair]/[method:subtrairComResultadoAnterior()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,27 @@
+package Main;
+
+public class Calculadora {
+	
+	int ultimoNumero = 0;
+
+	public int somar(int i, int j) {
+		ultimoNumero = i + j;
+		return ultimoNumero;
+	}
+
+	public int subtrair(int i, int j) {
+		ultimoNumero = i - j;
+		return ultimoNumero;
+	}
+	
+	public int somar(int i) {
+		ultimoNumero = i + ultimoNumero;
+		return ultimoNumero;
+	}
+
+	public int subtrair(int i) {
+		ultimoNumero = i - ultimoNumero;
+		return ultimoNumero;
+	}
+
+}
