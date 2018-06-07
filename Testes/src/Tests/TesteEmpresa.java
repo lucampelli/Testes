@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import Main.Empresa;
 import Main.Funcionario;
+import Main.Projeto;
 
 public class TesteEmpresa {
 
@@ -15,16 +16,25 @@ public class TesteEmpresa {
 	
 	@BeforeEach
 	public void beforeEach() {
-		empresa = new Empresa();
+		empresa = Empresa.Instance();
+		empresa.Reset();
 	}
 	
 	
 	@Test
+	void testProjeto() throws Exception {
+		Projeto p = new Projeto("Tibia 2", "001");
+		empresa.addProjeto(p);
+		assertNotNull(empresa.projetos());
+		assertEquals(p.id(), empresa.getProjetoByID("001").id());
+	}
+	
+	@Test
 	void testFuncionarios() throws Exception {
-		
 		Funcionario Godofredo = new Funcionario("Godofredo","0000001");
 		empresa.addFuncionario(Godofredo);
 		assertNotNull(empresa.funcionarios());
-		assertEquals(empresa.getFuncionarioByID("0000001"), Godofredo);
+		assertEquals(empresa.getFuncionarioByID("0000001").id(), Godofredo.id());
 	}
+
 }
