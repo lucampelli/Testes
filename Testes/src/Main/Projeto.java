@@ -7,11 +7,11 @@ public class Projeto {
 
 	private String Nome;
 	private String ID;
-	private HashMap<String,Funcionario> IDResponsaveis;
+	private ArrayList<String> responsaveis;
 	
 	private HashMap<String,Ocorrencia> ocorrencias;
 	
-	public Projeto(String nome, String id, Funcionario responsavel) throws Exception {
+	public Projeto(String nome, String id, String responsavel) throws Exception {
 		Nome = nome;
 		if(id.length() != 3) {
 			System.out.println("ID Inválido");
@@ -19,8 +19,8 @@ public class Projeto {
 		}
 		ID = id;
 		ocorrencias = new HashMap();
-		IDResponsaveis = new HashMap();
-		IDResponsaveis.put(responsavel.id(), responsavel);
+		responsaveis = new ArrayList();
+		responsaveis.add(responsavel);
 	}
 
 	public boolean equals(Projeto p) {
@@ -30,9 +30,9 @@ public class Projeto {
 		return p.id().equals(ID) && p.nome().equals(Nome);
 	}
 	
-	public void addFuncionario(Funcionario f) {
-		if(!IDResponsaveis.containsKey(f.id())) {
-			IDResponsaveis.put(f.id(), f);
+	public void addFuncionario(String f) {
+		if(!responsaveis.contains(f)) {
+			responsaveis.add(f);
 		} else {
 			System.out.println("Funcionário já faz parte deste projeto");
 		}
@@ -50,8 +50,8 @@ public class Projeto {
 		return ocorrencias;
 	}
 	
-	public HashMap<String, Funcionario> idResponsaveis(){
-		return IDResponsaveis;
+	public ArrayList<String> idResponsaveis(){
+		return responsaveis;
 	}
 
 	public boolean addOcorrencia(Ocorrencia o) throws Exception {

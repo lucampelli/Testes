@@ -33,7 +33,7 @@ public class TesteEmpresa {
 	void testProjeto() throws Exception {
 		Funcionario juninho = new Funcionario("Juninho", "0000007");
 		empresa.addFuncionario(juninho);
-		Projeto p = new Projeto("Tibia 2", "001", juninho);
+		Projeto p = new Projeto("Tibia 2", "001", juninho.id());
 		empresa.addProjeto(p);
 		assertNotNull(empresa.projetos());
 		assertEquals(p.id(), empresa.getProjetoByID("001").id());

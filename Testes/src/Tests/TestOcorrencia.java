@@ -24,7 +24,7 @@ public class TestOcorrencia {
 		empresa.Reset();
 		f = new Funcionario("Godofredo", "0000001");
 		empresa.addFuncionario(f);
-		p = new Projeto("Tibia 2", "001",f);
+		p = new Projeto("Tibia 2", "001",f.id());
 		empresa.addProjeto(p);
 		
 	}

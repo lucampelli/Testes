@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class Empresa {
 
-	private ArrayList<Funcionario> funcionarios;
+	private HashMap<String,Funcionario> funcionarios;
 	private HashMap<String,Projeto> projetos;
 
 	private static Empresa instance;
@@ -18,32 +18,36 @@ public class Empresa {
 	}
 
 	private Empresa() {
-		funcionarios = new ArrayList();
+		funcionarios = new HashMap();
 		projetos = new HashMap();
 	}
 
 	public void addFuncionario(Funcionario f) {
-		if (!funcionarios.contains(f)) {
-			funcionarios.add(f);
+		if (!funcionarios.containsKey(f.id())) {
+			funcionarios.put(f.id(),f);
 		}
 
 	}
 
-	public ArrayList<Funcionario> funcionarios() {
+	public HashMap<String,Funcionario> funcionarios() {
 		return funcionarios;
 	}
 
 	public Funcionario getFuncionarioByID(String ID) {
-		for (Funcionario f : funcionarios) {
-			if (f.id().equals(ID)) {
-				return f;
-			}
+		if(funcionarios.containsKey(ID)) {
+			return funcionarios.get(ID);
 		}
 		System.out.println("Funcionário não encontrado");
 		return null;
 	}
 
-	public void addProjeto(Projeto p) {
+	public void addProjeto(Projeto p) throws Exception {
+		for(String f : p.idResponsaveis()) {
+			if(!funcionarios.containsKey(f)) {
+				System.out.println("Projeto com algum funcionario Inválido ou Inexistente");
+				throw new Exception("Projeto com algum funcionario Inválido ou Inexistente");
+			}
+		}
 		if (!projetos.containsKey(p.id())) {
 			projetos.put(p.id(),p);
 		}
