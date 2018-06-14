@@ -31,16 +31,22 @@ public class TestOcorrencia {
 	
 	@Test
 	void testAdicionarOcorrenciaEmProjeto() throws Exception {
-		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o = new Ocorrencia("0000001","001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
 		assertTrue(p.addOcorrencia(o));
 		assertEquals(p.ocorrencias().size(), 1);
 		assertEquals(empresa.contarOcorrencias("0000001"), 1);
 	}
 	
 	@Test
+	void testAdicionarOcorrenciaAUmProjetoInexistente() throws Exception{
+		Ocorrencia o = new Ocorrencia("0000001","002", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		assertThrows(Exception.class, ()->{p.addOcorrencia(o);});
+	}
+	
+	@Test
 	void testAdicionarOcorrenciaDeMesmoID() throws Exception {
-		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
-		Ocorrencia o1 = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o = new Ocorrencia("0000001","001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o1 = new Ocorrencia("0000001", "001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
 		assertTrue(p.addOcorrencia(o));
 		assertThrows(Exception.class, ()->{p.addOcorrencia(o1);});
 	}
@@ -48,7 +54,7 @@ public class TestOcorrencia {
 	@Test
 	void testAdicionarOnzeOcorrencias() throws Exception {
 		for(int i = 0; i < 11; i++) {
-			Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "0000"+ (i < 10? "0" + i :  i));
+			Ocorrencia o = new Ocorrencia("0000001","001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "0000"+ (i < 10? "0" + i :  i));
 			if(i < 10) {
 				assertTrue(p.addOcorrencia(o));
 			} else {
@@ -59,7 +65,7 @@ public class TestOcorrencia {
 	
 	@Test
 	void testAdicionarEModificarOcorrênciaAberta() throws Exception {
-		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o = new Ocorrencia("0000001","001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
 		o.alterarPrioridade(Ocorrencia.Prioridade.Baixa);
 		assertEquals(Ocorrencia.Prioridade.Baixa, o.prioridade());
 		o.fechar("0000001");
@@ -68,7 +74,7 @@ public class TestOcorrencia {
 	
 	@Test
 	void testAdicionarEModificarOcorrênciaFechada() throws Exception {
-		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o = new Ocorrencia("0000001","001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
 		o.fechar("0000001");
 		assertEquals(Ocorrencia.Estado.Fechado, o.estado());
 		

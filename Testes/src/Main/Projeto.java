@@ -55,6 +55,15 @@ public class Projeto {
 	}
 
 	public boolean addOcorrencia(Ocorrencia o) throws Exception {
+		if(Empresa.Instance().getFuncionarioByID(o.idResponsavel()) == null) {
+			System.out.println("ID Usuário Inexistente");
+			throw new Exception("ID Usuário Inexistente");
+		}
+		if(Empresa.Instance().getProjetoByID(o.idProjeto()) == null) {
+			System.out.println("ID Projeto Inexistente");
+			throw new Exception("ID Projeto Inexistente");
+		}
+		
 		if(Empresa.Instance().contarOcorrencias(o.idResponsavel()) < 10) {
 			if(ocorrencias.containsKey(o.idOcorrencia())) {
 				System.out.println("Ocorrencia com id existente");
