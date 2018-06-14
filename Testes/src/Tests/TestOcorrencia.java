@@ -1,6 +1,9 @@
 package Tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +24,7 @@ public class TestOcorrencia {
 		empresa.Reset();
 		f = new Funcionario("Godofredo", "0000001");
 		empresa.addFuncionario(f);
-		p = new Projeto("Tibia 2", "001");
+		p = new Projeto("Tibia 2", "001",f);
 		empresa.addProjeto(p);
 		
 	}
@@ -35,9 +38,17 @@ public class TestOcorrencia {
 	}
 	
 	@Test
+	void testAdicionarOcorrenciaDeMesmoID() throws Exception {
+		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		Ocorrencia o1 = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		assertTrue(p.addOcorrencia(o));
+		assertThrows(Exception.class, ()->{p.addOcorrencia(o1);});
+	}
+	
+	@Test
 	void testAdicionarOnzeOcorrencias() throws Exception {
 		for(int i = 0; i < 11; i++) {
-			Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+			Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "0000"+ (i < 10? "0" + i :  i));
 			if(i < 10) {
 				assertTrue(p.addOcorrencia(o));
 			} else {
@@ -45,4 +56,24 @@ public class TestOcorrencia {
 			}
 		}
 	}
+	
+	@Test
+	void testAdicionarEModificarOcorrênciaAberta() throws Exception {
+		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		o.alterarPrioridade(Ocorrencia.Prioridade.Baixa);
+		assertEquals(Ocorrencia.Prioridade.Baixa, o.prioridade());
+		o.fechar("0000001");
+		assertEquals(Ocorrencia.Estado.Fechado, o.estado());
+	}
+	
+	@Test
+	void testAdicionarEModificarOcorrênciaFechada() throws Exception {
+		Ocorrencia o = new Ocorrencia("0000001", Ocorrencia.Tipo.Melhoria, Ocorrencia.Prioridade.Alta, "000001");
+		o.fechar("0000001");
+		assertEquals(Ocorrencia.Estado.Fechado, o.estado());
+		
+		assertThrows(Exception.class, ()->{o.alterarPrioridade(Ocorrencia.Prioridade.Baixa);});
+		
+	}
+	
 }

@@ -7,6 +7,7 @@ public class Ocorrencia {
 	private Prioridade prioridade;
 	private String idOcorrencia;
 	
+	
 	private Estado estado;
 	
 	public Ocorrencia(String idResponavel, Tipo tipo, Prioridade prioridade, String idOcorrencia) throws Exception {
@@ -34,9 +35,31 @@ public class Ocorrencia {
 		return idResponsavel;
 	}
 	
-	public void fechar(String id) {
+	public String idOcorrencia() {
+		return idOcorrencia;
+	}
+	
+	public void fechar(String id) throws Exception {
+		if(estado != Estado.Aberto) {
+			System.out.println("Ocorrencias fechadas não podem ser alteradas");
+			throw new Exception("Ocorrencias fechadas não podem ser alteradas");
+		}
 		if(id.equals(idResponsavel)) {
-			estado = Estado.Fechado;
+			
+				estado = Estado.Fechado;
+			
+		} else {
+			System.out.println("Somente o usuário responsável pela ocorrencia pode fechá-la");
+			throw new Exception("Somente o usuário responsável pela ocorrencia pode fechá-la");
+		}
+	}
+	
+	public void alterarPrioridade(Prioridade novaPrioridade) throws Exception {
+		if(estado == Estado.Aberto) {
+			prioridade = novaPrioridade;
+		} else {
+			System.out.println("Ocorrencias fechadas não podem ser alteradas");
+			throw new Exception("Ocorrencias fechadas não podem ser alteradas");
 		}
 	}
 	
@@ -44,8 +67,13 @@ public class Ocorrencia {
 		return estado;
 	}
 	
+	
 	public enum Estado {Aberto, Fechado};
 	public enum Tipo {Tarefa, Bug, Melhoria};
-	public enum Prioridade {Alta, Media, Baixa};
+	public enum Prioridade {Alta, Media, Baixa}
+	
+	public Prioridade prioridade() {
+		return prioridade;
+	};
 	
 }

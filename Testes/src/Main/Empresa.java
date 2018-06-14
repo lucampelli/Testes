@@ -1,11 +1,12 @@
 package Main;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Empresa {
 
 	private ArrayList<Funcionario> funcionarios;
-	private ArrayList<Projeto> projetos;
+	private HashMap<String,Projeto> projetos;
 
 	private static Empresa instance;
 
@@ -18,7 +19,7 @@ public class Empresa {
 
 	private Empresa() {
 		funcionarios = new ArrayList();
-		projetos = new ArrayList();
+		projetos = new HashMap();
 	}
 
 	public void addFuncionario(Funcionario f) {
@@ -43,21 +44,19 @@ public class Empresa {
 	}
 
 	public void addProjeto(Projeto p) {
-		if (!projetos.contains(p)) {
-			projetos.add(p);
+		if (!projetos.containsKey(p.id())) {
+			projetos.put(p.id(),p);
 		}
 
 	}
 
-	public ArrayList<Projeto> projetos() {
+	public HashMap<String,Projeto> projetos() {
 		return projetos;
 	}
 
 	public Projeto getProjetoByID(String ID) {
-		for (Projeto p : projetos) {
-			if (p.id().equals(ID)) {
-				return p;
-			}
+		if(projetos.containsKey(ID)) {
+			return projetos.get(ID);
 		}
 		System.out.println("Projeto não encontrado");
 		return null;
@@ -65,8 +64,8 @@ public class Empresa {
 
 	public int contarOcorrencias(String id) {
 		int count = 0;
-		for (Projeto p : projetos) {
-			for (Ocorrencia o : p.ocorrencias()) {
+		for (Projeto p : projetos.values()) {
+			for (Ocorrencia o : p.ocorrencias().values()) {
 				if (o.idResponsavel().equals(id) && o.estado().equals(Ocorrencia.Estado.Aberto)) {
 					count++;
 				}

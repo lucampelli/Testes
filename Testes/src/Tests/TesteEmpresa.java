@@ -15,19 +15,11 @@ public class TesteEmpresa {
 	Empresa empresa;
 	
 	@BeforeEach
-	public void beforeEach() {
+	public void beforeEach() throws Exception {
 		empresa = Empresa.Instance();
 		empresa.Reset();
 	}
 	
-	
-	@Test
-	void testProjeto() throws Exception {
-		Projeto p = new Projeto("Tibia 2", "001");
-		empresa.addProjeto(p);
-		assertNotNull(empresa.projetos());
-		assertEquals(p.id(), empresa.getProjetoByID("001").id());
-	}
 	
 	@Test
 	void testFuncionarios() throws Exception {
@@ -35,6 +27,16 @@ public class TesteEmpresa {
 		empresa.addFuncionario(Godofredo);
 		assertNotNull(empresa.funcionarios());
 		assertEquals(empresa.getFuncionarioByID("0000001").id(), Godofredo.id());
+	}
+	
+	@Test
+	void testProjeto() throws Exception {
+		Funcionario juninho = new Funcionario("Juninho", "0000007");
+		empresa.addFuncionario(juninho);
+		Projeto p = new Projeto("Tibia 2", "001", juninho);
+		empresa.addProjeto(p);
+		assertNotNull(empresa.projetos());
+		assertEquals(p.id(), empresa.getProjetoByID("001").id());
 	}
 
 }
